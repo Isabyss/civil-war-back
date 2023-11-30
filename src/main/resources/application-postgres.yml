@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:25432/civilwar}
+    username: ${DATABASE_USERNAME:civilwar}
+    password: ${DATABASE_PASSWORD:civilwar}

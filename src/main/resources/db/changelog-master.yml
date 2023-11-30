@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - changeSet:
+      id: 202311251200
+      author: ddamjanovic
+  - includeAll:
+      path: db/changelog

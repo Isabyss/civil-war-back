@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+  <changeSet id="202311251340" author="ddamjanovic">
+    <createTable tableName="player_base_resource_production">
+      <column name="player_base_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="resource_production_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="202311251341" author="ddamjanovic">
+    <addForeignKeyConstraint baseColumnNames="player_base_id"
+                             baseTableName="player_base_resource_production"
+                             constraintName="fk_player_base_resource_production_player_base"
+                             referencedColumnNames="id"
+                             referencedTableName="player_base"/>
+  </changeSet>
+
+  <changeSet id="202311251342" author="ddamjanovic">
+    <addForeignKeyConstraint baseColumnNames="resource_production_id"
+                             baseTableName="player_base_resource_production"
+                             constraintName="fk_player_base_resource_production_resource_production"
+                             referencedColumnNames="id"
+                             referencedTableName="resource_production"/>
+  </changeSet>
+
+</databaseChangeLog>
