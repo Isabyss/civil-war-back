@@ -1,7 +1,7 @@
 package com.basementinteractive.civilwar.resource.controller;
 
-import com.basementinteractive.civilwar.common.model.response.EntityCreatedResponse;
-import com.basementinteractive.civilwar.common.model.response.EntityDeletedResponse;
+import com.basementinteractive.civilwar.common.model.dto.response.EntityCreatedResponse;
+import com.basementinteractive.civilwar.common.model.dto.response.EntityDeletedResponse;
 import com.basementinteractive.civilwar.resource.model.dto.request.ResourceProductionSettingsRequest;
 import com.basementinteractive.civilwar.resource.model.dto.response.ResourceProductionSettingsResponse;
 import com.basementinteractive.civilwar.resource.service.ResourceProductionSettingsService;

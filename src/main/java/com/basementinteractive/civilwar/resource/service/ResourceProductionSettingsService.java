@@ -1,6 +1,6 @@
 package com.basementinteractive.civilwar.resource.service;
 
-import com.basementinteractive.civilwar.common.model.response.EntityCreatedResponse;
+import com.basementinteractive.civilwar.common.model.dto.response.EntityCreatedResponse;
 import com.basementinteractive.civilwar.resource.model.dto.request.ResourceProductionSettingsRequest;
 import com.basementinteractive.civilwar.resource.model.dto.response.ResourceProductionSettingsResponse;
 

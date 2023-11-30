@@ -3,7 +3,7 @@ package com.basementinteractive.civilwar.resource.service.impl;
 import com.basementinteractive.civilwar.common.exception.EntityNotFoundException;
 import com.basementinteractive.civilwar.common.mappers.EntityToResponseMapper;
 import com.basementinteractive.civilwar.common.mappers.RequestToEntityMapper;
-import com.basementinteractive.civilwar.common.model.response.EntityCreatedResponse;
+import com.basementinteractive.civilwar.common.model.dto.response.EntityCreatedResponse;
 import com.basementinteractive.civilwar.resource.model.ResourceProductionSettings;
 import com.basementinteractive.civilwar.resource.model.dto.request.ResourceProductionSettingsRequest;
 import com.basementinteractive.civilwar.resource.model.dto.response.ResourceProductionSettingsResponse;
@@ -41,6 +41,8 @@ public class ResourceProductionSettingsServiceImpl implements ResourceProduction
 
     @Override
     public ResourceProductionSettingsResponse update(Long id, ResourceProductionSettingsRequest resourceProductionSettingsRequest) {
+        validateFormula(resourceProductionSettingsRequest.getFormula());
+
         ResourceProductionSettings updatedResourceProductionSettings = resourceProductionSettingsRequestToEntityMapper.map(
                 resourceProductionSettingsRequest,
                 getByIdOrThrowEx(id)
