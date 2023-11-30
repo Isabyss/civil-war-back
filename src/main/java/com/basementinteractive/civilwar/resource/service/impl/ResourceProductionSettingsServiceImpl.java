@@ -10,6 +10,7 @@ import com.basementinteractive.civilwar.resource.model.dto.response.ResourceProd
 import com.basementinteractive.civilwar.resource.repository.ResourceProductionSettingsRepository;
 import com.basementinteractive.civilwar.resource.service.ResourceProductionSettingsService;
 import lombok.RequiredArgsConstructor;
+import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.ValidationResult;
 import org.springframework.stereotype.Service;
@@ -76,18 +77,24 @@ public class ResourceProductionSettingsServiceImpl implements ResourceProduction
 
     private void validateFormula(String formula) {
         try {
-            ValidationResult result = new ExpressionBuilder(formula)
+            Expression expression = new ExpressionBuilder(formula)
                     .variables(VARIABLE_LEVEL, VARIABLE_WORKERS, VARIABLE_BONUS)
-                    .build().validate(false);
+                    .build()
+                    .setVariable(VARIABLE_LEVEL, 1)
+                    .setVariable(VARIABLE_WORKERS, 1)
+                    .setVariable(VARIABLE_BONUS, 1);
 
-            if (!result.isValid()) {
-                String errorMessages = result.getErrors().stream()
+            expression.evaluate();
+            ValidationResult validationResult = expression.validate(false);
+
+            if (!validationResult.isValid()) {
+                String errorMessages = validationResult.getErrors().stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(", "));
 
-                throw new IllegalArgumentException(errorMessages);
+                throw new IllegalArgumentException("Invalid formula: " + errorMessages);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (ArithmeticException e) {
             throw new IllegalArgumentException("Invalid formula: " + e.getMessage());
         }
     }
