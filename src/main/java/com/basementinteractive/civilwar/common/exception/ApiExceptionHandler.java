@@ -3,6 +3,7 @@ package com.basementinteractive.civilwar.common.exception;
 import com.basementinteractive.civilwar.common.constants.TimeConstants;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import jakarta.persistence.EntityExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,14 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value = {EntityNotFoundException.class})
     public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e) {
-        logger.error("Entity not found: ", e);
+        logger.error("EXCEPTION Entity not found: ", e);
         return handleException("Entity not found", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {EntityExistsException.class})
+    public ResponseEntity<Object> handleEntityExistsException(EntityExistsException e) {
+        logger.error("EXCEPTION Entity already exists: ", e);
+        return handleException("Entity already exists", HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
@@ -34,13 +41,13 @@ public class ApiExceptionHandler {
 
         errorMsg = "Invalid argument(s): " + errorMsg;
 
-        logger.error(errorMsg);
+        logger.error("EXCEPTION " + errorMsg);
         return handleException(errorMsg, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {IllegalArgumentException.class})
     public ResponseEntity<Object> handleInvalidFormulaException(IllegalArgumentException e) {
-        logger.error("Invalid argument(s): ", e);
+        logger.error("EXCEPTION Invalid argument(s): ", e);
         return handleException(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
@@ -54,19 +61,19 @@ public class ApiExceptionHandler {
                     .collect(Collectors.joining(", "));
             errorMsg = "Invalid argument for field(s): " + errorMsg;
 
-            logger.error(errorMsg, ex);
+            logger.error("EXCEPTION " + errorMsg, ex);
             return handleException(errorMsg, HttpStatus.BAD_REQUEST);
         }
 
         errorMsg = "Invalid input provided.";
-        logger.error(errorMsg, ex);
+        logger.error("EXCEPTION " + errorMsg, ex);
 
         return handleException(errorMsg, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleGenericException(Exception e) {
-        logger.error("Internal Server Error: ", e);
+        logger.error("EXCEPTION Internal Server Error: ", e);
         return handleException("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

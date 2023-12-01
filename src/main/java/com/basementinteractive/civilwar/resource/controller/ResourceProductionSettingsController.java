@@ -32,7 +32,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/resource-production-settings")
-@Tag(name = "resource", description = "Operations pertaining to resource production settings in the application")
+@Tag(name = "Resource production settings", description = "Operations pertaining to resource production settings in the application")
 public class ResourceProductionSettingsController {
 
     private final ResourceProductionSettingsService resourceProductionSettingsService;

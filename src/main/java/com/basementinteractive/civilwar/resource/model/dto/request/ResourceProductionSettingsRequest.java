@@ -22,7 +22,7 @@ public class ResourceProductionSettingsRequest {
 
     @NotBlank(message = "must not be blank")
     @Size(max = 255, message = "must be between 3 and 255 characters")
-    @Schema(description = "The formula used to calculate the resource production - allowed variable names are LEVEL, WORKERS, and BONUS", example = "60*log(LEVEL*1.5)^BONUS*(WORKERS*1.25)")
+    @Schema(description = "The formula used to calculate the resource production - allowed variable names are LEVEL, WORKERS, PLAYER_BONUS and ZONE_BONUS", example = "60*log(LEVEL*1.5)^PLAYER_BONUS*(WORKERS*1.25)^ZONE_BONUS")
     private String formula;
 
     public void setName(String name) {

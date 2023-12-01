@@ -14,10 +14,19 @@
       <column name="player_id" type="BIGINT">
         <constraints nullable="false"/>
       </column>
-      <column name="x_coordinate" type="INT">
+      <column name="x" type="INT">
         <constraints nullable="false"/>
       </column>
-      <column name="y_coordinate" type="INT">
+      <column name="y" type="INT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="level" type="INT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="total_workers" type="INT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="player_bonus" type="DOUBLE">
         <constraints nullable="false"/>
       </column>
     </createTable>

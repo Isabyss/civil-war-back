@@ -38,8 +38,13 @@ public class SecurityConfig {
                                 mvcMatcherBuilder.pattern("/v3/api-docs/**"),
                                 mvcMatcherBuilder.pattern("/swagger-resources/**"),
                                 mvcMatcherBuilder.pattern("/webjars/**"),
+                                mvcMatcherBuilder.pattern("/players"),
+                                mvcMatcherBuilder.pattern("/players/**"),
+                                mvcMatcherBuilder.pattern("/bases"),
+                                mvcMatcherBuilder.pattern("/bases/**"),
                                 mvcMatcherBuilder.pattern("/resource-production-settings"),
-                                mvcMatcherBuilder.pattern("/resource-production-settings/**"))
+                                mvcMatcherBuilder.pattern("/resource-production-settings/**")
+                        )
                         .permitAll()
                 );
 

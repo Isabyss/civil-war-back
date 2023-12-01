@@ -3,6 +3,8 @@ package com.basementinteractive.civilwar.player.model;
 import com.basementinteractive.civilwar.playerbase.model.PlayerBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,13 +43,14 @@ public class Player {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", length = 6)
-    private String gender;
+    private Gender gender;
 
     @Column(name = "country", length = 30)
     private String country;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private Set<PlayerBase> playerBases = new HashSet<>();
+    private Set<PlayerBase> bases = new HashSet<>();
 
 }

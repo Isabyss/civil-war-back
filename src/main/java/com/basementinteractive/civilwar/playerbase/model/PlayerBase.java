@@ -12,9 +12,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -22,6 +26,9 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "player_base")
 public class PlayerBase {
@@ -32,11 +39,20 @@ public class PlayerBase {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "x_coordinate", nullable = false)
-    private Integer xCoordinate;
+    @Column(name = "x", nullable = false)
+    private Integer x;
 
-    @Column(name = "y_coordinate", nullable = false)
-    private Integer yCoordinate;
+    @Column(name = "y", nullable = false)
+    private Integer y;
+
+    @Column(name = "level", nullable = false)
+    private Integer level;
+
+    @Column(name = "total_workers", nullable = false)
+    private Integer totalWorkers;
+
+    @Column(name = "player_bonus", nullable = false)
+    private Double playerBonus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "playerBase")
     private Set<ResourceProduction> resourceProductions = new HashSet<>();
@@ -47,5 +63,10 @@ public class PlayerBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
     private Player player;
+
+    @PrePersist
+    protected void onCreate() {
+        level = 1;
+    }
 
 }

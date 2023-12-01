@@ -6,8 +6,7 @@ import lombok.Getter;
 public enum ResourceType {
     WOOD("Wood"),
     ORE("Ore"),
-    FOOD("Food"),
-    WORKER("Workers");
+    FOOD("Food");
 
     private final String description;
 
